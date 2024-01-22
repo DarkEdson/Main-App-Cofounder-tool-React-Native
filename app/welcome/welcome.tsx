@@ -21,19 +21,19 @@ export default function Page() {
   };
   return (
     <View style={styles.container}>
-      <Text style={styles.headerText}>Welcome</Text>
+      <Text style={styles.headerText}>Home Page</Text>
 
       <Image
         source={{ uri: 'https://i.pinimg.com/736x/f7/20/fc/f720fc7a7037f912d18c01d525bc046d.jpg' }}
         style={styles.roundedImage}
       />
 
-      <TouchableOpacity onPress={handleSignInPress} style={styles.roundedButton} >
-        <Text style={styles.buttonText}>Sign In</Text>
+      <TouchableOpacity  style={styles.roundedButton} >
+        <Text style={styles.buttonText}>Home</Text>
       </TouchableOpacity>
 
-      <Text style={styles.footerText}>Don't have an account? <TouchableOpacity onPress={handleRegisterPress}>
-          <Text style={styles.registerLink}>Register</Text>
+      <Text style={styles.footerText}>This is Home <TouchableOpacity >
+          <Text style={styles.registerLink}>Homes</Text>
         </TouchableOpacity></Text>
     </View>
   );
