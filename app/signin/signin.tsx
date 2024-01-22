@@ -20,13 +20,14 @@ export default function Page() {
   async function signInWithEmail() {
     console.log('signin')
     setLoading(true)
-    const { error } = await supabase.auth.signInWithPassword({
+    const {  data: { session },
+    error, } = await supabase.auth.signInWithPassword({
       email: textEmail,
       password: textPassword,
     })
 
     if (error) {Alert.alert(error.message)}
-    console.log('pase IF', error)
+    console.log('pase IF', error, session)
     if (error == null) router.push('/welcome/welcome')
     setLoading(false)
   }
