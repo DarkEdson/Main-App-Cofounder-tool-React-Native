@@ -3,7 +3,7 @@ import { Text, View , ScrollView, StyleSheet , TouchableOpacity, Image } from 'r
 import { Link } from 'expo-router';
 
 import '@tamagui/core/reset.css'
-
+import config   from './tamagui.config'
 import { TamaguiProvider, createTamagui } from 'tamagui'
 import TextBox from './components/textBox';
 import Canvas from 'react-native-canvas';
@@ -99,6 +99,7 @@ export default function Page(this: any) {
   
 
   return (
+    <TamaguiProvider config={config}>
     <ScrollView contentContainerStyle={styles.scrollViewContent}>
     <View>
       <Link href="/about/about">About</Link>
@@ -121,6 +122,7 @@ export default function Page(this: any) {
       {canvasImage && <Image style={{ width: 100, height: 100 }} source={{ uri: canvasImage }} />}
     </View>
     </ScrollView>
+    </TamaguiProvider>
   );
 }
 const styles = StyleSheet.create({

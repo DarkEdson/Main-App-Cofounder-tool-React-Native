@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { TextInput, View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import globalStyles from '../styles/globalStyle';
 
 interface TextBoxProps {
   title?: string;
@@ -23,18 +24,18 @@ const TextBox: React.FC<TextBoxProps> = ({ title, placeholder, onChangeText, isP
   };
 
   return (
-    <View style={styles.container}>
-      {title && <Text style={styles.title}>{title}</Text>}
-      <View style={styles.inputContainer}>
+    <View style={globalStyles.containerTextBox}>
+      {title && <Text style={globalStyles.titleTextBox}>{title}</Text>}
+      <View style={globalStyles.inputContainerTextBox}>
       <TextInput
-        style={styles.input}
+        style={globalStyles.inputTextBox}
         placeholder={placeholder}
         value={text}
         onChangeText={handleTextChange}
         secureTextEntry={isPassword && !showPassword}
       />
       {isPassword && (
-          <TouchableOpacity style={styles.eyeIcon} onPress={toggleShowPassword}>
+          <TouchableOpacity style={globalStyles.eyeIcon} onPress={toggleShowPassword}>
             <Ionicons name={showPassword ? 'eye-off' : 'eye'} size={24} color="black" />
           </TouchableOpacity>
         )}
@@ -43,32 +44,5 @@ const TextBox: React.FC<TextBoxProps> = ({ title, placeholder, onChangeText, isP
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    margin: 10,
-    width: '95%'
-  },
-  title: {
-    fontSize: 16,
-    marginBottom: 5,
-  },
-  inputContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    borderWidth: 1,
-    borderColor: 'dimgrey',
-    borderRadius: 9,
-    backgroundColor: 'lightgray',
-    marginBottom: 10,
-  },
-  input: {
-    flex: 1,
-    height: 40,
-    paddingHorizontal: 10,
-  },
-  eyeIcon: {
-    padding: 10,
-  },
-});
 
 export default TextBox;
