@@ -4,14 +4,17 @@ import { Ionicons } from '@expo/vector-icons';
 import TextBox from '../components/textBox';
 import { supabase } from '../lib/supabase'
 import globalStyles from '../styles/globalStyle';
+import { useAppDispatch } from '../store/hooks';
+import { loggedIn } from '../store/reducer';
 
 import { Link, router } from 'expo-router';
 
 
-export default function Page() {
+export default function SignIn({navigation}:any) {
     const [textEmail, setTextEmail] = useState('');
   const [textPassword, setTextPassword] = useState('');
   const [loading, setLoading] = useState(false)
+  const dispatch = useAppDispatch();
   const handleTextEmail = (newText: string) => {
     setTextEmail(newText);
   };
@@ -29,26 +32,18 @@ export default function Page() {
 
     if (error) {Alert.alert(error.message)}
     console.log('pase IF', error, session)
-    if (error == null) router.push('/welcome/welcome')
+    if (error == null) {dispatch(loggedIn()); navigation.navigate("HomeTabs") }
     setLoading(false)
   }
-  const handleSignInPress = () => {
-    // Aquí debes implementar la lógica para navegar a la otra pantalla
-    console.log('Navigate to Sign In screen');
-    router.push('/welcome/welcome')
-    // Por ejemplo, puedes usar la navegación de React Navigation
-    // navigation.navigate('RegisterScreen');
-  };
   const handleRegisterPress = () => {
-    // Aquí debes implementar la lógica para navegar a la otra pantalla
     console.log('Navigate to Register screen');
-    router.push('/register/register')
-    // Por ejemplo, puedes usar la navegación de React Navigation
+    navigation.navigate("Register")
+    //router.push('/register/register')
     // navigation.navigate('RegisterScreen');
   };
   const handleGoBack = () => {
-    // Navegar hacia atrás
-    router.back();
+    // dispatch(loggedIn())
+    navigation.goBack();
   };
   return (
     <View style={globalStyles.container}>
