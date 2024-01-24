@@ -36,7 +36,7 @@ function MyBottomTabs() {
         options={{ headerShown: false, tabBarShowLabel:false, 
           tabBarIcon: ({focused}) => (
             <Ionicons
-              name="settings"
+              name="newspaper-outline"
               color={focused ? "deepskyblue" : "black"}
               size={25}
             />
