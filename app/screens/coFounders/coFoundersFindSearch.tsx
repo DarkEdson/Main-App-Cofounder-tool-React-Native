@@ -1,19 +1,22 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, Image, ActivityIndicator, StyleSheet } from "react-native";
 
 export default function CoFoundersFindSearch() {
   const [dialogVisible, setDialogVisible] = useState(false);
 
+  useEffect(() => {
+    // Establece el timeout
+    setTimeout(handleFindResults, 10000); // 10 segundos
+  }, []);
+
   const handleConfirm = () => {
-    // Lógica para confirmar
     setDialogVisible(false);
   };
 
   const handleCancel = () => {
-    // Lógica para cancelar
     setDialogVisible(false);
   };
-  const handleSignInPress = () => {
+  const handleFindResults = () => {
     console.log("Navigate to Sign In screen");
     //router.push("/signin/signin");
     // navigation.navigate('RegisterScreen');
