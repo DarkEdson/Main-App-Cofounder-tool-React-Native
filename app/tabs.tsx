@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { View, Text } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import About from "./about/about";
 import Welcome from "./welcome/welcome";
@@ -9,9 +8,11 @@ import NewScreen from "./welcome/screen";
 import Register from "./register/register";
 import Signin from "./signin/signin";
 import { useAppSelector } from "./store/hooks";
+import CoFoundersFindForm from "./screens/coFounders/coFoundersFindForm";
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
+
 
 function MyBottomTabs() {
   return (
@@ -47,7 +48,6 @@ function MyBottomTabs() {
 }
 
 export default function tabs() {
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
   const Logging = useAppSelector((state) => state.logins.value);
 
   return (
@@ -57,6 +57,21 @@ export default function tabs() {
           <Stack.Screen
             name="HomeTabs"
             component={MyBottomTabs}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="CoFoundersFind"
+            component={CoFoundersFindForm}
+            options={{ title: 'Find your Co-Founder' }}
+          />
+          <Stack.Screen
+            name="FindingPage"
+            component={Welcome}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="ResulltPage"
+            component={Welcome}
             options={{ headerShown: false }}
           />
         </Stack.Group>

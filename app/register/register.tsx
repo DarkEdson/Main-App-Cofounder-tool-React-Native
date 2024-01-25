@@ -2,17 +2,14 @@ import React, { useState } from "react";
 import {
   View,
   Text,
-  Image,
   TouchableOpacity,
-  StyleSheet,
+  ActivityIndicator,
   Alert,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import TextBox from "../components/textBox";
 import { supabase } from "../lib/supabase";
 import globalStyles from "../styles/globalStyle";
-
-import { Link, router } from "expo-router";
 
 export default function Register({ navigation }: any) {
   const [textName, setTextName] = useState("");
@@ -29,17 +26,13 @@ export default function Register({ navigation }: any) {
     setTextPassword(newText);
   };
   const handleRegisterPress = () => {
-    console.log("Navigate to Register screen");
-    //router.push('/signin/signin')
     navigation.navigate("SignIn");
-    // navigation.navigate('RegisterScreen');
   };
   const handleGoBack = () => {
     navigation.goBack();
   };
 
   async function signUpWithEmail() {
-    console.log("signUP");
     setLoading(true);
     const {
       data: { session },
@@ -53,7 +46,6 @@ export default function Register({ navigation }: any) {
         },
       },
     });
-    console.log("signUP", error, session);
     if (error) Alert.alert(error.message);
     if (!session)
       Alert.alert("Please check your inbox for email verification!");
@@ -62,6 +54,8 @@ export default function Register({ navigation }: any) {
   }
   return (
     <View style={globalStyles.container}>
+      {loading ? <ActivityIndicator size="large" color="#330066" /> :
+      <>
       <View style={globalStyles.buttonContainer}>
         <TouchableOpacity
           onPress={handleGoBack}
@@ -105,6 +99,7 @@ export default function Register({ navigation }: any) {
           <Text style={globalStyles.registerLink}>Login</Text>
         </TouchableOpacity>
       </Text>
+      </>}
     </View>
   );
 }

@@ -1,13 +1,8 @@
 import React from "react";
-import { View, Text, Image, TouchableOpacity, StyleSheet } from "react-native";
-import { Button } from "tamagui";
+import { View, Text, Image, TouchableOpacity } from "react-native";
 import globalStyles from "../styles/globalStyle";
-import { Link, router } from "expo-router";
-import { useAppDispatch } from "../store/hooks";
-import { loggedIn } from "../store/reducer";
 
 export default function About({ navigation }: any) {
-  const dispatch = useAppDispatch();
   const handleSignInPress = () => {
     console.log("Navigate to Sign In screen");
 

@@ -1,18 +1,15 @@
 import React from "react";
-import { View, Text, Image, TouchableOpacity, StyleSheet } from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 
-import { Link, router } from "expo-router";
 
 export default function NewScreen() {
   const handleSignInPress = () => {
     console.log("Navigate to Sign In screen");
-    //router.push("/signin/signin");
-    // navigation.navigate('RegisterScreen');
+
   };
   const handleRegisterPress = () => {
     console.log("Navigate to Register screen");
-    //router.push("/register/register");
-    // navigation.navigate('RegisterScreen');
+
   };
   return (
     <View style={styles.container}>

@@ -2,9 +2,6 @@ import { Provider } from "react-redux";
 import { store } from "./store/store";
 import { NavigationContainer } from "@react-navigation/native";
 
-import "@tamagui/core/reset.css";
-import config from "./tamagui.config";
-import { TamaguiProvider, createTamagui } from "tamagui";
 import React from "react";
 import TabsScreen from "./tabs";
 import { LogBox } from "react-native";
@@ -15,11 +12,9 @@ LogBox.ignoreLogs([
 export default function Page() {
   return (
     <Provider store={store}>
-      <TamaguiProvider config={config}>
         <NavigationContainer independent={true}>
           <TabsScreen />
         </NavigationContainer>
-      </TamaguiProvider>
     </Provider>
   );
 }

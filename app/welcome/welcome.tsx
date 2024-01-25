@@ -1,26 +1,49 @@
-import React from "react";
-import { View, Text, Image, TouchableOpacity, StyleSheet } from "react-native";
-
-import { Link, router } from "expo-router";
-import { useAppDispatch } from "../store/hooks";
+import React , { useState, useEffect }from "react";
+import { View, Text, Image, TouchableOpacity, StyleSheet, GestureResponderEvent } from "react-native";
+import { supabase } from '../lib/supabase'
+import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { loggedOut } from "../store/reducer";
-import { useNavigation } from "@react-navigation/native";
 
-export default function Welcome() {
-  const navigation = useNavigation();
+export default function Welcome({navigation} : any) {
+  const sessionSave = useAppSelector((state) => state.sessions.value);
 
   const dispatch = useAppDispatch();
-  const handleSignOutPress = () => {
-    console.log("Navigate to Sign In screen");
-    dispatch(loggedOut());
-    navigation.navigate("WelcomeLogin" as never);
-    //router.push('/signin/signin')
-    // navigation.navigate('RegisterScreen');
+
+  const handleconsole = () => {
+    getProfile();
+  };
+
+  async function getProfile() {
+    try {
+      if (!sessionSave?.user) throw new Error('No user on the session!')
+      const { data, error, status } = await supabase
+        .from('profiles')
+        .select(`username, website, avatar_url`)
+        .eq('id', sessionSave?.user.id)
+        .single()
+      if (error && status !== 406) {
+        throw error
+      }
+
+      if (data) {
+        console.log('DATA', data)
+        // setUsername(data.username)
+        // setWebsite(data.website)
+        // setAvatarUrl(data.avatar_url)
+      }
+    } catch (error) {
+      if (error instanceof Error) {
+        console.log(error.message)
+      }
+    } finally {
+    }
+  }
+  const handleNavigation = (routeName: String) => {
+    navigation.navigate(routeName);
   };
   const handleRegisterPress = () => {
-    console.log("Navigate to Register screen");
-    router.push("/register/register");
-    // navigation.navigate('RegisterScreen');
+    dispatch(loggedOut());
+    navigation.navigate("WelcomeLogin" as never);
   };
   return (
     <View style={styles.container}>
@@ -49,25 +72,25 @@ export default function Welcome() {
       </View>
       <View style={styles.bodyContainer}>
       <View style={styles.row}>
-        <Box title="CO-FOUNDER FINDING" image="imagen_1" />
-        <Box title="RESOURCES" image="imagen_2" />
+        <Box title="CO-FOUNDER FINDING" image="imagen_1" onPressed={()=>handleNavigation('CoFoundersFind')}/>
+        <Box title="RESOURCES" image="imagen_2" onPressed={handleconsole} />
       </View>
       <View style={styles.row}>
-        <Box title="SOCIAL MEDIA" image="imagen_3" />
-        <Box title="MENTORS" image="imagen_4" />
+        <Box title="SOCIAL MEDIA" image="imagen_3" onPressed={handleconsole} />
+        <Box title="MENTORS" image="imagen_4"  onPressed={handleconsole} />
       </View>
       <View style={styles.row}>
-        <Box title="INVESTORS" image="imagen_5" />
+        <Box title="INVESTORS" image="imagen_5"  onPressed={handleconsole} />
       </View>
       </View>
     </View>
   );
 }
 
-const Box = ({ title, image }: { title: string; image: string }) => {
+const Box = ({ title, image, onPressed }: { title: string; image: string; onPressed: (event: GestureResponderEvent) => void }) => {
   return (
     <View style={styles.box}>
-      <TouchableOpacity style={styles.buttomBox}>
+      <TouchableOpacity style={styles.buttomBox} onPress={onPressed}>
       <Image style={styles.image} source={{ uri: "https://t3.ftcdn.net/jpg/02/43/51/48/240_F_243514868_XDIMJHNNJYKLRST05XnnTj0MBpC4hdT5.jpg" }} />
       <Text style={styles.title}>{title}</Text>
       </TouchableOpacity>
