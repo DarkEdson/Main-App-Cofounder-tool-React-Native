@@ -9,6 +9,7 @@ import Register from "./register/register";
 import Signin from "./signin/signin";
 import { useAppSelector } from "./store/hooks";
 import CoFoundersFindForm from "./screens/coFounders/coFoundersFindForm";
+import CoFoundersFindSearch from "./screens/coFounders/coFoundersFindSearch";
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -66,8 +67,8 @@ export default function tabs() {
           />
           <Stack.Screen
             name="FindingPage"
-            component={Welcome}
-            options={{ headerShown: false }}
+            component={CoFoundersFindSearch}
+            options={{ title: '' }}
           />
           <Stack.Screen
             name="ResulltPage"

@@ -44,6 +44,8 @@ const DropdownComponent: React.FC<DropdownComponentProps> = ({ title, options, v
 const styles = StyleSheet.create({
   container: {
     margin: 10,
+    justifyContent: 'center',
+    alignContent: 'center'
   },
   title: {
     fontWeight: "bold",

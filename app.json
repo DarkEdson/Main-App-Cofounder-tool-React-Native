@@ -31,5 +31,8 @@
     "plugins": [
       "expo-router"
     ]
+  },
+  "react-native-google-mobile-ads": {
+    "android_app_id": "ca-app-pub-9897563913863121~2329637484"
   }
 }
