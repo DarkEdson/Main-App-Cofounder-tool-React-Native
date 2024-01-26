@@ -3,6 +3,8 @@ import {
   View,
   Text,
   TouchableOpacity,
+  KeyboardAvoidingView,
+  Platform ,
   ActivityIndicator,
   Alert,
 } from "react-native";
@@ -53,7 +55,10 @@ export default function Register({ navigation }: any) {
     setLoading(false);
   }
   return (
-    <View style={globalStyles.container}>
+    <KeyboardAvoidingView
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      style={globalStyles.container}
+    >
       {loading ? <ActivityIndicator size="large" color="#330066" /> :
       <>
       <View style={globalStyles.buttonContainer}>
@@ -99,7 +104,8 @@ export default function Register({ navigation }: any) {
           <Text style={globalStyles.registerLink}>Login</Text>
         </TouchableOpacity>
       </Text>
-      </>}
-    </View>
+      </>
+      }
+    </KeyboardAvoidingView>
   );
 }
