@@ -36,7 +36,7 @@ const Dialog: React.FC<DialogProps> = ({
               <Text style={styles.modalText}>{title}</Text>
               <View style={styles.buttonsView}>
               <CustomButton text1="Buy Subscription" text2="Only 100 BDT Per Month" onPress={onConfirm}  styles={buttonStyle} />
-              <CustomButton text1="Watch an ad" onPress={onCancel}  styles={buttonStyle} />
+              <CustomButton text1="Watch an ad" onPress={onCancel}  styles={buttonStyle2} />
               </View>
             </View>
           </View>
@@ -47,7 +47,10 @@ const Dialog: React.FC<DialogProps> = ({
 };
 
 const buttonStyle = StyleSheet.create({
-    container: {backgroundColor:'#330066', borderColor: 'black', borderRadius: 10, borderWidth: 1, paddingHorizontal: 5, marginTop:5, borderBottomWidth:2.5, borderRightWidth:2.5}
+    container: {backgroundColor:'#835cf5', borderColor: 'black', borderRadius: 10, borderWidth: 1, paddingHorizontal: 5, marginTop:5, borderBottomWidth:2.5, borderRightWidth:2.5}
+})
+const buttonStyle2 = StyleSheet.create({
+  container: {backgroundColor:'#a285f3', borderColor: 'black', borderRadius: 10, borderWidth: 1, paddingHorizontal: 5, marginTop:5, borderBottomWidth:2.5, borderRightWidth:2.5}
 })
 
 const styles = StyleSheet.create({

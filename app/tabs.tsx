@@ -10,6 +10,8 @@ import Signin from "./signin/signin";
 import { useAppSelector } from "./store/hooks";
 import CoFoundersFindForm from "./screens/coFounders/coFoundersFindForm";
 import CoFoundersFindSearch from "./screens/coFounders/coFoundersFindSearch";
+import CoFoundersFindResult from "./screens/coFounders/coFoundersFindResult";
+import CustomBackButton from "./components/customBackButton";
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -72,8 +74,10 @@ export default function tabs() {
           />
           <Stack.Screen
             name="ResulltPage"
-            component={Welcome}
-            options={{ headerShown: false }}
+            component={CoFoundersFindResult}
+            options={{ title: '' ,  headerLeft: () => (
+              <CustomBackButton  />
+            ),}}
           />
         </Stack.Group>
       ) : (
@@ -98,3 +102,5 @@ export default function tabs() {
     </Stack.Navigator>
   );
 }
+
+
