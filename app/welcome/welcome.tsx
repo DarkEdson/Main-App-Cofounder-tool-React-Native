@@ -3,9 +3,48 @@ import { View, Text, Image, TouchableOpacity, StyleSheet, GestureResponderEvent 
 import { supabase } from '../lib/supabase'
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { loggedOut } from "../store/reducer";
+import { InterstitialAd, AdEventType, TestIds } from 'react-native-google-mobile-ads';
+
+const adUnitId = __DEV__ ? TestIds.INTERSTITIAL : 'ca-app-pub-xxxxxxxxxxxxx/yyyyyyyyyyyyyy';
+
+const interstitial = InterstitialAd.createForAdRequest(adUnitId, {
+  requestNonPersonalizedAdsOnly: true,
+  keywords: ['games', 'dinosaurs'],
+});
 
 export default function Welcome({navigation} : any) {
   const sessionSave = useAppSelector((state) => state.sessions.value);
+
+  const [loaded, setLoaded] = useState(false);
+
+
+  const handleShowInterstitial = () => {
+    console.log('LOADED?',loaded)
+    if (loaded) {
+      interstitial.show();
+      setLoaded(false)
+      const unsubscribe = interstitial.addAdEventListener(AdEventType.LOADED, () => {
+        setLoaded(true);
+      });
+  
+      // Start loading the interstitial straight away
+      interstitial.load();
+  
+      // Unsubscribe from events on unmount
+      return unsubscribe;
+    } else {
+      const unsubscribe = interstitial.addAdEventListener(AdEventType.LOADED, () => {
+        setLoaded(true);
+      });
+  
+      // Start loading the interstitial straight away
+      interstitial.load();
+      console.warn("Interstitial ad not loaded yet.");
+      // Unsubscribe from events on unmount
+      return unsubscribe;
+     
+    }
+  };
 
   const dispatch = useAppDispatch();
 
@@ -50,7 +89,7 @@ export default function Welcome({navigation} : any) {
       <View style={styles.headerContainer}>
         <View style={styles.headerContainer2}>
           <View style={{ marginHorizontal: 30 }}>
-            <Text style={styles.headerText}>hello Mr. Founder!</Text>
+            <Text style={styles.headerText}>hello Mr. Founder!.</Text>
             <Text style={styles.footerText}>Good Evening</Text>
           </View>
           <TouchableOpacity
@@ -73,7 +112,7 @@ export default function Welcome({navigation} : any) {
       <View style={styles.bodyContainer}>
       <View style={styles.row}>
         <Box title="CO-FOUNDER FINDING" image="imagen_1" onPressed={()=>handleNavigation('CoFoundersFind')}/>
-        <Box title="RESOURCES" image="imagen_2" onPressed={handleconsole} />
+        <Box title="RESOURCES" image="imagen_2" onPressed={handleShowInterstitial} />
       </View>
       <View style={styles.row}>
         <Box title="SOCIAL MEDIA" image="imagen_3" onPressed={handleconsole} />
