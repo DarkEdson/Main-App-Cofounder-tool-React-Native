@@ -22,7 +22,7 @@ export default function CoFoundersFindForm({navigation}:any) {
     console.log('LOAD AD?')
     
     const onFocus = () => {
-      console.log("La pantalla ha obtenido el foco. Puedes activar tu lógica aquí.", isLoaded);
+      console.log("focus.", isLoaded);
       // Lógica del useEffect aquí...
       load()
     };

@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import {
-  TextInput,
   View,
   Text,
   TouchableOpacity,
 } from "react-native";
+import {Input } from 'tamagui'
 import { Ionicons } from "@expo/vector-icons";
 import globalStyles from "../styles/globalStyle";
 
@@ -37,13 +37,9 @@ const TextBox: React.FC<TextBoxProps> = ({
     <View style={globalStyles.containerTextBox}>
       {title && <Text style={globalStyles.titleTextBox}>{title}</Text>}
       <View style={globalStyles.inputContainerTextBox}>
-        <TextInput
-          style={globalStyles.inputTextBox}
-          placeholder={placeholder}
-          value={text}
-          onChangeText={handleTextChange}
-          secureTextEntry={isPassword && !showPassword}
-        />
+        <Input size="$4" borderWidth={0} width="85%" backgroundColor="$gray8Light" placeholder={placeholder} color="black"  value={text} 
+        onChangeText={handleTextChange}
+        secureTextEntry={isPassword && !showPassword} />
         {isPassword && (
           <TouchableOpacity
             style={globalStyles.eyeIcon}

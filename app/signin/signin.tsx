@@ -15,6 +15,7 @@ import globalStyles from "../styles/globalStyle";
 import { useAppDispatch } from "../store/hooks";
 import { loggedIn } from "../store/reducer";
 import { sessionAdd } from "../store/sessionReducer";
+import {Button } from 'tamagui'
 
 
 export default function SignIn({ navigation }: any) {
@@ -92,13 +93,7 @@ export default function SignIn({ navigation }: any) {
             onChangeText={handleTextPassword}
             isPassword
           />
-
-          <TouchableOpacity
-            onPress={signInWithEmail}
-            style={globalStyles.roundedButton2}
-          >
-            <Text style={globalStyles.buttonText}>Sign In</Text>
-          </TouchableOpacity>
+          <Button size="$5" width="92%" fontSize={20}  backgroundColor="$purple8Dark" onPress={signInWithEmail} marginTop="$12">Sign In</Button>
 
           <Text style={globalStyles.footerText}>
             Don't have an account?{" "}

@@ -75,7 +75,7 @@ const globalStyles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "dimgrey",
     borderRadius: 9,
-    backgroundColor: "lightgray",
+    backgroundColor: "#C7C7C7",
     marginBottom: 10,
   },
   inputTextBox: {

@@ -1,6 +1,7 @@
 import React from "react";
 import { View, Text, Image, TouchableOpacity } from "react-native";
 import globalStyles from "../styles/globalStyle";
+import { Button } from 'tamagui'
 
 export default function About({ navigation }: any) {
   const handleSignInPress = () => {
@@ -26,13 +27,7 @@ export default function About({ navigation }: any) {
         }}
         style={globalStyles.roundedImage}
       />
-
-      <TouchableOpacity
-        onPress={handleSignInPress}
-        style={globalStyles.roundedButton}
-      >
-        <Text style={globalStyles.buttonText}>Sign In</Text>
-      </TouchableOpacity>
+      <Button size="$5" width="92%" fontSize={20} backgroundColor="$purple8Dark" onPress={handleSignInPress}>Sign In</Button>
 
       <Text style={globalStyles.footerText}>
         Don't have an account?{" "}
@@ -40,6 +35,7 @@ export default function About({ navigation }: any) {
           <Text style={globalStyles.registerLink}>Register</Text>
         </TouchableOpacity>
       </Text>
+      
     </View>
   );
 }

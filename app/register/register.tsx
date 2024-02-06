@@ -12,6 +12,7 @@ import { Ionicons } from "@expo/vector-icons";
 import TextBox from "../components/textBox";
 import { supabase } from "../lib/supabase";
 import globalStyles from "../styles/globalStyle";
+import {Button } from 'tamagui'
 
 export default function Register({ navigation }: any) {
   const [textName, setTextName] = useState("");
@@ -91,12 +92,7 @@ export default function Register({ navigation }: any) {
         isPassword
       />
 
-      <TouchableOpacity
-        onPress={signUpWithEmail}
-        style={globalStyles.roundedButton2}
-      >
-        <Text style={globalStyles.buttonText}>Register</Text>
-      </TouchableOpacity>
+      <Button size="$5" width="92%" fontSize={20}  backgroundColor="$purple8Dark" onPress={signUpWithEmail} marginTop="$12">Register</Button>
 
       <Text style={globalStyles.footerText}>
         Already have an account?{" "}
