@@ -112,7 +112,7 @@ export default function Welcome({navigation} : any) {
       <View style={styles.bodyContainer}>
       <View style={styles.row}>
         <Box title="CO-FOUNDER FINDING" image="imagen_1" onPressed={()=>handleNavigation('CoFoundersFind')}/>
-        <Box title="RESOURCES" image="imagen_2" onPressed={handleShowInterstitial} />
+        <Box title="RESOURCES" image="imagen_2" onPressed={()=>handleNavigation('ResourcesHome')} />
       </View>
       <View style={styles.row}>
         <Box title="SOCIAL MEDIA" image="imagen_3" onPressed={handleconsole} />

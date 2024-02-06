@@ -7,6 +7,8 @@ import Welcome from "./welcome/welcome";
 import NewScreen from "./welcome/screen";
 import Register from "./register/register";
 import Signin from "./signin/signin";
+import ResourcesHome from "./screens/resourcesScreens/resourceHome";
+import Resource from "./screens/resourcesScreens/resource";
 import { useAppSelector } from "./store/hooks";
 import CoFoundersFindForm from "./screens/coFounders/coFoundersFindForm";
 import CoFoundersFindSearch from "./screens/coFounders/coFoundersFindSearch";
@@ -75,6 +77,18 @@ export default function tabs() {
           <Stack.Screen
             name="ResulltPage"
             component={CoFoundersFindResult}
+            options={{ title: '' ,  headerLeft: () => (
+              <CustomBackButton  />
+            ),}}
+          />
+          <Stack.Screen
+            name="ResourcesHome"
+            component={ResourcesHome}
+            options={{ title: 'Articles' }}
+          />
+          <Stack.Screen
+            name="Resource"
+            component={Resource}
             options={{ title: '' ,  headerLeft: () => (
               <CustomBackButton  />
             ),}}

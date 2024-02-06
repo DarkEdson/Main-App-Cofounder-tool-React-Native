@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import {
   View,
-  Text,
+  
   TouchableOpacity,
   KeyboardAvoidingView,
   Platform ,
@@ -15,7 +15,7 @@ import globalStyles from "../styles/globalStyle";
 import { useAppDispatch } from "../store/hooks";
 import { loggedIn } from "../store/reducer";
 import { sessionAdd } from "../store/sessionReducer";
-import {Button } from 'tamagui'
+import {Text,Button, XGroup } from 'tamagui'
 
 
 export default function SignIn({ navigation }: any) {
@@ -77,9 +77,9 @@ export default function SignIn({ navigation }: any) {
             </TouchableOpacity>
           </View>
           <View style={globalStyles.textContainer}>
-            <Text style={globalStyles.headerText2}>Let's Sign You In</Text>
-            <Text style={globalStyles.partialText}>Welcome Back.</Text>
-            <Text style={globalStyles.partialText}>You've been missed!</Text>
+            <Text color="black" style={globalStyles.headerText2}>Let's Sign You In</Text>
+            <Text color="black" style={globalStyles.partialText}>Welcome Back.</Text>
+            <Text color="black" style={globalStyles.partialText}>You've been missed!</Text>
           </View>
 
           <TextBox
@@ -95,12 +95,20 @@ export default function SignIn({ navigation }: any) {
           />
           <Button size="$5" width="92%" fontSize={20}  backgroundColor="$purple8Dark" onPress={signInWithEmail} marginTop="$12">Sign In</Button>
 
-          <Text style={globalStyles.footerText}>
-            Don't have an account?{" "}
-            <TouchableOpacity onPress={handleRegisterPress}>
-              <Text style={globalStyles.registerLink}>Register</Text>
-            </TouchableOpacity>
-          </Text>
+          <XGroup>
+        <XGroup.Item>
+        <Text color="black" fontSize={16} marginTop="$1.5">
+        Don't have an account?{" "}
+      </Text>
+        </XGroup.Item>
+
+        <XGroup.Item>
+        <Button width="25%" size="$2" fontSize={16} color="$purple8Dark" chromeless onPress={handleRegisterPress}>
+        Register
+          </Button>
+        </XGroup.Item>
+      </XGroup>
+          
           </>
           
       )}

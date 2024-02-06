@@ -1,7 +1,7 @@
 import React from "react";
-import { View, Text, Image, TouchableOpacity } from "react-native";
+import { View,  Image, TouchableOpacity } from "react-native";
 import globalStyles from "../styles/globalStyle";
-import { Button } from 'tamagui'
+import { Button, Text, XGroup } from 'tamagui'
 
 export default function About({ navigation }: any) {
   const handleSignInPress = () => {
@@ -19,7 +19,7 @@ export default function About({ navigation }: any) {
   };
   return (
     <View style={globalStyles.container}>
-      <Text style={globalStyles.headerText}>Welcome</Text>
+      <Text color="skyblue" fontSize={35} fontWeight={"bold"}>Welcome</Text>
 
       <Image
         source={{
@@ -29,12 +29,20 @@ export default function About({ navigation }: any) {
       />
       <Button size="$5" width="92%" fontSize={20} backgroundColor="$purple8Dark" onPress={handleSignInPress}>Sign In</Button>
 
-      <Text style={globalStyles.footerText}>
+      <XGroup>
+        <XGroup.Item>
+        <Text color="black" fontSize={16} marginTop="$1.5">
         Don't have an account?{" "}
-        <TouchableOpacity onPress={handleRegisterPress}>
-          <Text style={globalStyles.registerLink}>Register</Text>
-        </TouchableOpacity>
       </Text>
+        </XGroup.Item>
+
+        <XGroup.Item>
+        <Button width="25%" size="$2" fontSize={16} color="$purple8Dark" chromeless onPress={handleRegisterPress}>
+        Register
+          </Button>
+        </XGroup.Item>
+      </XGroup>
+      
       
     </View>
   );
