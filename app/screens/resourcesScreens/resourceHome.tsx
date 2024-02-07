@@ -5,32 +5,45 @@ import { ScrollView , TouchableOpacity} from 'react-native';
 import { Ionicons } from "@expo/vector-icons";
 import globalStyles from "../../styles/globalStyle";
 import {StackCard} from '../../components/stackCard';
+import { useAppDispatch } from '../../store/hooks';
+import {setArticle} from '../../store/articleReducer';
+import { IsArticleSelected } from '../../store/articleReducer';
+export default function ResourcesHome({navigation} : any) {
 
-export default function ResourcesHome() {
-
+    const dispatch = useAppDispatch();
     const [textSearch, settextSearch] = useState('');
 
-    const listaObjetos = [{tag :'Entertainment',
+    const listaObjetos: IsArticleSelected[] = [{tag :'Entertainment',
     title :'Introduction to Javascript',
     author : 'Joseph chase',
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam convallis mi id nibh congue, in ultrices enim ultricies. Quisque sollicitudin congue diam, porttitor posuere urna fringilla ut. Praesent sed tortor non ante semper tristique. Mauris tincidunt ante orci, nec vulputate nisi condimentum sed. Curabitur nibh mi, mollis ut sollicitudin aliquet, auctor et justo. Fusce magna lorem, aliquam in fermentum at, tincidunt et mi. Mauris tincidunt nunc vitae ante pulvinar, eu vehicula augue pretium. Vivamus a hendrerit velit. Proin sit amet risus mi. Proin accumsan scelerisque purus eget faucibus. Praesent ac sollicitudin arcu. Pellentesque laoreet placerat purus commodo euismod. Nulla purus purus, finibus eu nisl sed, suscipit porta turpis.',
     imageUri: 'https://placekitten.com/200/287',
     days : '10'},
     {tag :'Games',
     title :'Introduction to React',
     author : 'Joseph chase',
     imageUri: 'https://placekitten.com/200/286',
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam convallis mi id nibh congue, in ultrices enim ultricies. Quisque sollicitudin congue diam, porttitor posuere urna fringilla ut. Praesent sed tortor non ante semper tristique. Mauris tincidunt ante orci, nec vulputate nisi condimentum sed. Curabitur nibh mi, mollis ut sollicitudin aliquet, auctor et justo. Fusce magna lorem, aliquam in fermentum at, tincidunt et mi. Mauris tincidunt nunc vitae ante pulvinar, eu vehicula augue pretium. Vivamus a hendrerit velit. Proin sit amet risus mi. Proin accumsan scelerisque purus eget faucibus. Praesent ac sollicitudin arcu. Pellentesque laoreet placerat purus commodo euismod. Nulla purus purus, finibus eu nisl sed, suscipit porta turpis.',
     days : '5'},
     {tag :'Society',
     title :'Introduction to Node',
     author : 'Joseph chase',
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam convallis mi id nibh congue, in ultrices enim ultricies. Quisque sollicitudin congue diam, porttitor posuere urna fringilla ut. Praesent sed tortor non ante semper tristique. Mauris tincidunt ante orci, nec vulputate nisi condimentum sed. Curabitur nibh mi, mollis ut sollicitudin aliquet, auctor et justo. Fusce magna lorem, aliquam in fermentum at, tincidunt et mi. Mauris tincidunt nunc vitae ante pulvinar, eu vehicula augue pretium. Vivamus a hendrerit velit. Proin sit amet risus mi. Proin accumsan scelerisque purus eget faucibus. Praesent ac sollicitudin arcu. Pellentesque laoreet placerat purus commodo euismod. Nulla purus purus, finibus eu nisl sed, suscipit porta turpis.',
     imageUri: 'https://placekitten.com/200/250',
     days : '15'},
     {tag :'Internet',
     title :'Introduction to Devops',
     author : 'Joseph chase',
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam convallis mi id nibh congue, in ultrices enim ultricies. Quisque sollicitudin congue diam, porttitor posuere urna fringilla ut. Praesent sed tortor non ante semper tristique. Mauris tincidunt ante orci, nec vulputate nisi condimentum sed. Curabitur nibh mi, mollis ut sollicitudin aliquet, auctor et justo. Fusce magna lorem, aliquam in fermentum at, tincidunt et mi. Mauris tincidunt nunc vitae ante pulvinar, eu vehicula augue pretium. Vivamus a hendrerit velit. Proin sit amet risus mi. Proin accumsan scelerisque purus eget faucibus. Praesent ac sollicitudin arcu. Pellentesque laoreet placerat purus commodo euismod. Nulla purus purus, finibus eu nisl sed, suscipit porta turpis.',
     imageUri: 'https://placekitten.com/250/250',
     days : '25'},
 ]
+
+const handleNavigateArticle = (item:IsArticleSelected) => {
+    dispatch(setArticle(item));
+    console.log(item)
+    navigation.navigate('Resource');
+}
 
   const handleTextSearch = (newText: string) => {
     settextSearch(newText);
@@ -64,7 +77,7 @@ export default function ResourcesHome() {
         <XGroup.Item >
         <TouchableOpacity
             style={globalStyles.eyeIcon}
-            onPress={()=>{}}
+            onPress={()=>{console.log('Pressed')}}
           >
             <Ionicons
               name={"grid-outline"}
@@ -89,7 +102,7 @@ export default function ResourcesHome() {
         
         </XStack>
         {listaObjetos.map( (item,key )=>{
-            return <StackCard key={key} tag={item.tag} title={item.title} author={item.author} days={item.days} imageUri={item.imageUri} onPressButton={()=>{console.log(item.title)}} />
+            return <StackCard key={key} tag={item.tag} title={item.title} author={item.author} days={item.days} imageUri={item.imageUri as string} onPressButton={()=>{handleNavigateArticle(item)}} />
         })
 
         }

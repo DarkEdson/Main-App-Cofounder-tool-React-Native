@@ -89,9 +89,7 @@ export default function tabs() {
           <Stack.Screen
             name="Resource"
             component={Resource}
-            options={{ title: '' ,  headerLeft: () => (
-              <CustomBackButton  />
-            ),}}
+            options={{ headerShown: false }}
           />
         </Stack.Group>
       ) : (
