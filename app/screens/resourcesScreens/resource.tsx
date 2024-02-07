@@ -1,52 +1,266 @@
-import React ,{useState, useEffect}from 'react';
-import {Text,View, H3, XStack, XGroup, YStack, Unspaced,Image, Button} from 'tamagui'
-import { useAppSelector } from '../../store/hooks';
-import { IsArticleSelected } from '../../store/articleReducer';
-import { colores } from '../../styles/colors';
-export default function Resource({navigation} : any) {
-    const [itemSelected, setitemSelected] = useState<IsArticleSelected>(useAppSelector((state) => state.articles))
-    const [percent, setpercent] = useState('0%')
-    const getRandomColorname = ()=>{
-        const randomIndex = Math.floor(Math.random()*colores.length)
-        return colores[randomIndex]+'7'
-    } 
-    const [colorText, setcolorText] = useState('$red7')
-    const [colorBg, setcolorBg] = useState('$red7Light')
-    
-    
-    useEffect(() => {
-      return () => {
-        let articleSelected:IsArticleSelected = useAppSelector((state) => state.articles)
-        setitemSelected(articleSelected)
-        if (articleSelected && articleSelected.tag) {
-            setpercent(((articleSelected.tag.length + 3) / 2) * 10 + '%');
-        } else {
-            setpercent('50%')
-        }
-        let colorSelected = '$'+getRandomColorname()
-        setcolorText(colorSelected)
-        setcolorBg(colorSelected+'Light')
-
-
-      };
-    }, [])
+import React, { useState, useEffect } from "react";
+import {
+  Text,
+  Image,
+  View,
+  H3,
+  H4,
+  XStack,
+  XGroup,
+  YStack,
+  Unspaced,
+  Button,
+  ZStack,
+  Paragraph,
+  H2,
+  Avatar,
+} from "tamagui";
+import { StyleSheet, ScrollView, TouchableOpacity } from "react-native";
+import { useAppSelector } from "../../store/hooks";
+import { IsArticleSelected } from "../../store/articleReducer";
+import { colores } from "../../styles/colors";
+import { Ionicons } from "@expo/vector-icons";
+export default function Resource({ navigation }: any) {
+  const [itemSelected, setitemSelected] = useState<IsArticleSelected>(
+    useAppSelector((state) => state.articles)
+  );
+  const [percent, setpercent] = useState("50%");
+  const getRandomColorname = () => {
+    const randomIndex = Math.floor(Math.random() * colores.length);
+    return colores[randomIndex] + "7";
+  };
+  const [colorText, setcolorText] = useState("$" + getRandomColorname());
+  const [colorBg, setcolorBg] = useState(colorText + "Light");
 
   return (
-    <View>
-      <Text color="black">{itemSelected.tag}</Text>
-      <Text color="black">{itemSelected.title}</Text>
-      <Text color="black">{itemSelected.author}</Text>
-      <Text color="black">{itemSelected.days}</Text>
-      <Text color="black">{itemSelected.description}</Text>
-      <Image
-      borderRadius={20}
-      source={{
-        uri: itemSelected.imageUri,
-        width: 100,
-        height: 175,
-      }}
-    />
-    <Button onPress={()=>{navigation.navigate('ResourcesHome')}}>back</Button>
-     </View>
+    <ZStack fullscreen flex={1}>
+      <YStack
+        width={"100%"}
+        height={"60%"}
+        borderRadius="$4"
+        borderColor="$color"
+      >
+        <Image
+          source={{
+            uri: itemSelected.imageUri as string,
+            height: 400,
+          }}
+        />
+      </YStack>
+      <YStack
+        borderColor="$color"
+        backgroundColor="$colorTransparent"
+        alignItems="center"
+        justifyContent="center"
+        y={40}
+        x={10}
+        width={50}
+        height={50}
+        borderRadius="$3"
+      >
+        <TouchableOpacity
+          onPress={() => {
+            navigation.goBack()
+          }}
+          style={{
+            backgroundColor: "rgba(255, 255, 255, 0.5)",
+            width: "100%",
+            height: "100%",
+            borderRadius: 6,
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Ionicons name={"chevron-back-outline"} size={24} color="white" />
+        </TouchableOpacity>
+      </YStack>
+      <YStack
+        borderColor="white"
+        backgroundColor="$colorTransparent"
+        alignItems="center"
+        justifyContent="center"
+        y={40}
+        x={280}
+        width={50}
+        height={50}
+        borderWidth={0.5}
+        borderRadius="$3"
+      >
+        <TouchableOpacity
+          onPress={() => {
+            console.log("Pressed");
+          }}
+        >
+          <Ionicons name={"menu-outline"} size={24} color="white" />
+        </TouchableOpacity>
+      </YStack>
+
+      <YStack
+        borderColor="$color"
+        backgroundColor="$color"
+        fullscreen
+        padding="$4"
+        y={350}
+        borderRadius="$6"
+      >
+        <YStack
+          backgroundColor="$color"
+          borderRadius="$3"
+          padding="$2"
+          marginBottom="$2"
+        >
+          <H4
+            color={colorText}
+            backgroundColor={colorBg}
+            width={percent}
+            borderRadius={10}
+            textAlign="center"
+          >
+            {itemSelected.tag}
+          </H4>
+          <H3 color="black" fontWeight={"bold"}>
+            {itemSelected.title}
+          </H3>
+          <XStack marginTop='$5'>
+            <Avatar circular size="$5" marginRight='$3'>
+              <Avatar.Image
+                accessibilityLabel="Cam"
+                src="https://images.unsplash.com/photo-1548142813-c348350df52b?&w=150&h=150&dpr=2&q=80"
+              />
+              <Avatar.Fallback backgroundColor="$blue10" />
+            </Avatar>
+            <YStack width={'60%'}>
+              <Text color="black" fontSize={18} fontWeight="800">
+                {itemSelected.author}{" "}
+              </Text>
+              <XStack>
+                <Text color="black" fontSize={13} marginRight="$3">
+                  {itemSelected.days} ago
+                </Text>
+                <Text color="black" fontSize={13}>
+                  sample text 2{" "}
+                </Text>
+              </XStack>
+            </YStack>
+            <XStack marginTop='$3'>
+            <YStack marginRight='$3'>
+            <TouchableOpacity
+          onPress={() => {
+            console.log("Pressed");
+          }}
+        >
+          <Ionicons name={"share-social-outline"} size={24} color="black" />
+        </TouchableOpacity>
+
+            </YStack>
+            
+        <TouchableOpacity
+          onPress={() => {
+            console.log("Pressed");
+          }}
+        >
+          <Ionicons name={"share-outline"} size={24} color="black" />
+        </TouchableOpacity>
+        </XStack>
+          </XStack>
+        </YStack>
+        <ScrollView>
+          <Text color="black" fontSize={18} fontWeight="800">
+            {itemSelected.title}{" "}
+          </Text>
+          <Paragraph color="black" fontSize={15}>
+            {itemSelected.description}
+          </Paragraph>
+          <Paragraph fontSize={15}>{itemSelected.description}</Paragraph>
+        </ScrollView>
+      </YStack>
+      <YStack
+        borderColor="$color"
+        backgroundColor="$blue7"
+        padding="$4"
+        y={310}
+        x={260}
+        width={70}
+        height={70}
+        borderRadius="$12"
+      >
+        <TouchableOpacity
+          onPress={() => {
+            console.log("Pressed");
+          }}
+        >
+          <Ionicons
+            name={"thumbs-up-outline"}
+            size={24}
+            color="white"
+            style={{ marginTop: 3, marginLeft: 3 }}
+          />
+        </TouchableOpacity>
+      </YStack>
+    </ZStack>
   );
 }
+
+const DropDownstyles = StyleSheet.create({
+  container: { width: "95%", marginLeft: 30 },
+  dropdown: {
+    borderColor: "black",
+    borderRadius: 10,
+    borderWidth: 1,
+    paddingHorizontal: 5,
+    marginTop: 5,
+    borderBottomWidth: 2.5,
+    borderRightWidth: 2.5,
+  },
+});
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "white",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  containerView: {
+    position: "absolute",
+    top: "25%",
+    flex: 1,
+    backgroundColor: "white",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+
+  roundedImage: {
+    width: "100%",
+    height: 410,
+    top: 0,
+    position: "absolute",
+  },
+  roundedImage2: {
+    width: "40%",
+    height: "40%",
+    top: 0,
+    position: "absolute",
+  },
+  roundedButton: {
+    marginTop: 20,
+    alignContent: "center",
+    alignItems: "center",
+    paddingTop: "8%",
+    backgroundColor: "#330066",
+    borderRadius: 10,
+    width: "35%",
+    height: "27%",
+    paddingVertical: 15,
+    paddingHorizontal: 30,
+    borderBottomWidth: 4,
+    borderRightWidth: 4,
+    borderWidth: 1,
+  },
+  buttonText: {
+    alignSelf: "center",
+    color: "gray",
+    fontWeight: "bold",
+    fontSize: 25,
+  },
+});
