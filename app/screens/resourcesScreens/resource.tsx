@@ -98,10 +98,13 @@ export default function Resource({ navigation }: any) {
       <YStack
         borderColor="$color"
         backgroundColor="$color"
-        fullscreen
-        padding="$4"
+        paddingHorizontal="$4"
+        paddingTop="$4"
+        paddingBottom="$1"
+        height='51%'
         y={350}
-        borderRadius="$6"
+        borderTopRightRadius="$6"
+        borderTopLeftRadius="$6"
       >
         <YStack
           backgroundColor="$color"
@@ -171,7 +174,6 @@ export default function Resource({ navigation }: any) {
           <Paragraph color="black" fontSize={15}>
             {itemSelected.description}
           </Paragraph>
-          <Paragraph fontSize={15}>{itemSelected.description}</Paragraph>
         </ScrollView>
       </YStack>
       <YStack
