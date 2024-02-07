@@ -115,11 +115,11 @@ const handleNavigateArticle = (item:IsArticleSelected) => {
         </XStack>
         {filTerList.length > 0 ? (
         filTerList.map( (item,key )=>{
-            return <StackCard key={key} tag={item.tag} title={item.title} author={item.author} days={item.days} imageUri={item.imageUri as string} onPressButton={()=>{handleNavigateArticle(item)}} />
+            return <StackCard key={key} tag={item.tag.toUpperCase()} title={item.title} author={item.author} days={item.days} imageUri={item.imageUri as string} onPressButton={()=>{handleNavigateArticle(item)}} />
         })
 
         ) : (
-            <Text color="black">No Results From "{textSearch}"</Text>
+            <H3 color="black">No Results From "{textSearch}"</H3> 
           )}
       </YStack>
       </ScrollView>

@@ -24,7 +24,7 @@ export default function Resource({ navigation }: any) {
   const [itemSelected, setitemSelected] = useState<IsArticleSelected>(
     useAppSelector((state) => state.articles)
   );
-  const [percent, setpercent] = useState("50%");
+  const [percent, setpercent] = useState("60%");
   const getRandomColorname = () => {
     const randomIndex = Math.floor(Math.random() * colores.length);
     return colores[randomIndex] + "7";
@@ -105,15 +105,15 @@ export default function Resource({ navigation }: any) {
           padding="$2"
           marginBottom="$2"
         >
-          <H4
+          <Text
             color={colorText}
             backgroundColor={colorBg}
             width={percent}
             borderRadius={10}
             textAlign="center"
           >
-            {itemSelected.tag}
-          </H4>
+            {itemSelected.tag.toUpperCase()}
+          </Text>
           <H3 color="black" fontWeight={"bold"}>
             {itemSelected.title}
           </H3>
