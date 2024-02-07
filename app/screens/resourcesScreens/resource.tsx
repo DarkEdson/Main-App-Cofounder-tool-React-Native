@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   Text,
   Image,
@@ -62,14 +62,7 @@ export default function Resource({ navigation }: any) {
           onPress={() => {
             navigation.goBack()
           }}
-          style={{
-            backgroundColor: "rgba(255, 255, 255, 0.5)",
-            width: "100%",
-            height: "100%",
-            borderRadius: 6,
-            justifyContent: "center",
-            alignItems: "center",
-          }}
+          style={styles.roundedButton}
         >
           <Ionicons name={"chevron-back-outline"} size={24} color="white" />
         </TouchableOpacity>
@@ -203,66 +196,14 @@ export default function Resource({ navigation }: any) {
   );
 }
 
-const DropDownstyles = StyleSheet.create({
-  container: { width: "95%", marginLeft: 30 },
-  dropdown: {
-    borderColor: "black",
-    borderRadius: 10,
-    borderWidth: 1,
-    paddingHorizontal: 5,
-    marginTop: 5,
-    borderBottomWidth: 2.5,
-    borderRightWidth: 2.5,
-  },
-});
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "white",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  containerView: {
-    position: "absolute",
-    top: "25%",
-    flex: 1,
-    backgroundColor: "white",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-
-  roundedImage: {
-    width: "100%",
-    height: 410,
-    top: 0,
-    position: "absolute",
-  },
-  roundedImage2: {
-    width: "40%",
-    height: "40%",
-    top: 0,
-    position: "absolute",
-  },
   roundedButton: {
-    marginTop: 20,
-    alignContent: "center",
+    backgroundColor: "rgba(255, 255, 255, 0.5)",
+    width: "100%",
+    height: "100%",
+    borderRadius: 6,
+    justifyContent: "center",
     alignItems: "center",
-    paddingTop: "8%",
-    backgroundColor: "#330066",
-    borderRadius: 10,
-    width: "35%",
-    height: "27%",
-    paddingVertical: 15,
-    paddingHorizontal: 30,
-    borderBottomWidth: 4,
-    borderRightWidth: 4,
-    borderWidth: 1,
-  },
-  buttonText: {
-    alignSelf: "center",
-    color: "gray",
-    fontWeight: "bold",
-    fontSize: 25,
   },
 });
