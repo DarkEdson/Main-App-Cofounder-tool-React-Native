@@ -38,6 +38,7 @@ export default function ResourcesHome({navigation} : any) {
     imageUri: 'https://placekitten.com/250/250',
     days : '25'},
 ]
+const [filTerList, setfilterList] = useState(listaObjetos)
 
 const handleNavigateArticle = (item:IsArticleSelected) => {
     dispatch(setArticle(item));
@@ -47,6 +48,17 @@ const handleNavigateArticle = (item:IsArticleSelected) => {
 
   const handleTextSearch = (newText: string) => {
     settextSearch(newText);
+    const filteredList = listaObjetos.filter((item) => {
+        const searchTextLower = newText.toLowerCase();
+        return (
+          item.title.toLowerCase().includes(searchTextLower) ||
+          item.author.toLowerCase().includes(searchTextLower) ||
+          item.tag.toLowerCase().includes(searchTextLower) ||
+          item.description.toLowerCase().includes(searchTextLower)
+        );
+      });
+    
+       setfilterList(filteredList);
   };
   return (
     <View>
@@ -101,11 +113,14 @@ const handleNavigateArticle = (item:IsArticleSelected) => {
         </XGroup>
         
         </XStack>
-        {listaObjetos.map( (item,key )=>{
+        {filTerList.length > 0 ? (
+        filTerList.map( (item,key )=>{
             return <StackCard key={key} tag={item.tag} title={item.title} author={item.author} days={item.days} imageUri={item.imageUri as string} onPressButton={()=>{handleNavigateArticle(item)}} />
         })
 
-        }
+        ) : (
+            <Text color="black">No Results From "{textSearch}"</Text>
+          )}
       </YStack>
       </ScrollView>
      </View>

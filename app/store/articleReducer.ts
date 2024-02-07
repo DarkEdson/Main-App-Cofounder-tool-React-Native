@@ -1,12 +1,12 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export interface IsArticleSelected {
-    tag?: string;
-    title?: string;
-    author?: string;
-    days?: string;
-    imageUri?: string;
-    description?:string
+    tag: string;
+    title: string;
+    author: string;
+    days: string;
+    imageUri: string;
+    description:string
 }
 
 const initialState: IsArticleSelected = {
@@ -22,13 +22,13 @@ const articleSlice = createSlice({
   name: "articleSelected",
   initialState,
   reducers: {
-    setArticle: (state, action: PayloadAction<IsArticleSelected | null>) => {
-      state.tag = action.payload?.tag;
-      state.title = action.payload?.title;
-      state.author = action.payload?.author;
-      state.days = action.payload?.days;
-      state.imageUri = action.payload?.imageUri;
-      state.description = action.payload?.description;
+    setArticle: (state, action: PayloadAction<IsArticleSelected>) => {
+      state.tag = action.payload.tag;
+      state.title = action.payload.title;
+      state.author = action.payload.author;
+      state.days = action.payload.days;
+      state.imageUri = action.payload.imageUri;
+      state.description = action.payload.description;
     },
     resetArticle: (state) => {
         state.tag = 'tags';
