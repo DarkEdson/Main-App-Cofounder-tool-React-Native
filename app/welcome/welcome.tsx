@@ -3,48 +3,11 @@ import { View, Text, Image, TouchableOpacity, StyleSheet, GestureResponderEvent 
 import { supabase } from '../lib/supabase'
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { loggedOut } from "../store/reducer";
-import { InterstitialAd, AdEventType, TestIds } from 'react-native-google-mobile-ads';
 
-const adUnitId = __DEV__ ? TestIds.INTERSTITIAL : 'ca-app-pub-xxxxxxxxxxxxx/yyyyyyyyyyyyyy';
-
-const interstitial = InterstitialAd.createForAdRequest(adUnitId, {
-  requestNonPersonalizedAdsOnly: true,
-  keywords: ['games', 'dinosaurs'],
-});
 
 export default function Welcome({navigation} : any) {
   const sessionSave = useAppSelector((state) => state.sessions.value);
 
-  const [loaded, setLoaded] = useState(false);
-
-
-  const handleShowInterstitial = () => {
-    console.log('LOADED?',loaded)
-    if (loaded) {
-      interstitial.show();
-      setLoaded(false)
-      const unsubscribe = interstitial.addAdEventListener(AdEventType.LOADED, () => {
-        setLoaded(true);
-      });
-  
-      // Start loading the interstitial straight away
-      interstitial.load();
-  
-      // Unsubscribe from events on unmount
-      return unsubscribe;
-    } else {
-      const unsubscribe = interstitial.addAdEventListener(AdEventType.LOADED, () => {
-        setLoaded(true);
-      });
-  
-      // Start loading the interstitial straight away
-      interstitial.load();
-      console.warn("Interstitial ad not loaded yet.");
-      // Unsubscribe from events on unmount
-      return unsubscribe;
-     
-    }
-  };
 
   const dispatch = useAppDispatch();
 

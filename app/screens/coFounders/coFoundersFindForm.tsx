@@ -2,9 +2,7 @@ import React, { useState, useEffect } from "react";
 import { View, Text, Image, TouchableOpacity, StyleSheet, ActivityIndicator } from "react-native";
 import DropdownComponent from "../../components/dropDownButton";
 import Dialog from "../../components/dialogBox";
-import { useInterstitialAd, AdEventType, TestIds } from 'react-native-google-mobile-ads';
 
-const adUnitId = __DEV__ ? TestIds.INTERSTITIAL : 'ca-app-pub-xxxxxxxxxxxxx/yyyyyyyyyyyyyy';
 
 // const interstitial = InterstitialAd.createForAdRequest(adUnitId, {
 //   requestNonPersonalizedAdsOnly: true,
@@ -12,38 +10,17 @@ const adUnitId = __DEV__ ? TestIds.INTERSTITIAL : 'ca-app-pub-xxxxxxxxxxxxx/yyyy
 // });
 
 export default function CoFoundersFindForm({navigation}:any) {
-  const { isLoaded, isClosed, load, show } = useInterstitialAd(adUnitId, {
-    requestNonPersonalizedAdsOnly: true,
-  });
+
   const [dialogVisible, setDialogVisible] = useState(false);
-  const [loaded, setLoaded] = useState(false);
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     console.log('LOAD AD?')
-    
-    const onFocus = () => {
-      console.log("focus.", isLoaded);
-      // Lógica del useEffect aquí...
-      load()
-    };
 
-    // Agrega el evento de enfoque
-    const unsubscribeFocus = navigation.addListener("focus", onFocus);
-
-    // Limpia el evento de enfoque al desmontar la pantalla
-    return () => {
-      unsubscribeFocus();
-    };
    
     
-  }, [load,navigation]);
+  }, [navigation]);
 
-  useEffect(() => {
-    if (isClosed) {
-      // Action after the ad is closed
-      navigation.navigate('FindingPage');
-    }
-  }, [isClosed, navigation]);
+  
 
   const [selectedOption, setSelectedOption] = useState({
     value: "",
@@ -71,36 +48,10 @@ export default function CoFoundersFindForm({navigation}:any) {
   const handleCancel = () => {
     setDialogVisible(false);
     setLoading(true);
-    loadinAd()
   };
 
-  const loadinAd = ()=>{
-    // handleInterstitialLoad()
-    setLoading(false);
-    handleShowInterstitial();
-    
-    // setTimeout(() => {
-    //   // Tu lógica aquí después del tiempo de espera
-    //   console.log("Después del tiempo de espera de 3 segundos");
-    //   // Restablecer el estado de carga después de la ejecución
-    //   handleShowInterstitial();
-    //   setLoading(false);
-    // }, 4000);
-  }
-  const handleInterstitialLoad = () => {
-    load()
-  };
-  const handleShowInterstitial = () => {
-    console.log('LOADED?',isLoaded)
-    show()
-    if (isLoaded) {
-      show()
-      handleInterstitialLoad()
-    } else {
-      handleInterstitialLoad()
-     
-    }
-  };
+  
+
 
   return (
     
@@ -137,7 +88,7 @@ export default function CoFoundersFindForm({navigation}:any) {
 
         <TouchableOpacity
           style={styles.roundedButton}
-          onPress={() => {setDialogVisible(true); handleInterstitialLoad()}}
+          onPress={() => {setDialogVisible(true); }}
         >
           <Text style={styles.buttonText}>Find</Text>
         </TouchableOpacity>

@@ -1,7 +1,6 @@
 import { Provider } from "react-redux";
 import { store } from "./store/store";
 import { NavigationContainer } from "@react-navigation/native";
-import 'expo-dev-client';
 import '@tamagui/core/reset.css'
 
 import { TamaguiProvider } from 'tamagui'
