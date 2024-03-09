@@ -13,6 +13,7 @@ import TextBox from "../components/textBox";
 import { supabase } from "../lib/supabase";
 import globalStyles from "../styles/globalStyle";
 import {Button } from 'tamagui'
+import { register } from "../utils/apis";
 
 export default function Register({ navigation }: any) {
   const [textName, setTextName] = useState("");
@@ -37,23 +38,31 @@ export default function Register({ navigation }: any) {
 
   async function signUpWithEmail() {
     setLoading(true);
-    const {
-      data: { session },
-      error,
-    } = await supabase.auth.signUp({
-      email: textEmail,
-      password: textPassword,
-      options: {
-        data: {
-          displayName: textName,
-        },
-      },
-    });
-    if (error) Alert.alert(error.message);
-    if (!session)
-      Alert.alert("Please check your inbox for email verification!");
-    if (session == null && error == null) navigation.navigate("SignIn");
-    setLoading(false);
+    // const {
+    //   data: { session },
+    //   error,
+    // } = await supabase.auth.signUp({
+    //   email: textEmail,
+    //   password: textPassword,
+    //   options: {
+    //     data: {
+    //       displayName: textName,
+    //     },
+    //   },
+    // });
+    try {
+      const response = await register(textName, textEmail, textPassword);
+      console.log(response);
+      
+      if (response.user)
+        Alert.alert("Please check your inbox for email verification!");
+      if (response.user  && response.user !== null) navigation.navigate("SignIn");
+      setLoading(false);
+    } catch (error) {
+      if (error) Alert.alert('Error' +error.toString());
+      console.error(error);
+    }
+   
   }
   return (
     <KeyboardAvoidingView

@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, Image, TouchableOpacity, StyleSheet, ActivityIndicator } from "react-native";
+import { View, Text, Image, TouchableOpacity, StyleSheet, ActivityIndicator, Alert } from "react-native";
 import DropdownComponent from "../../components/dropDownButton";
 import Dialog from "../../components/dialogBox";
+import { findMatch } from "../../utils/apis";
+import { useAppDispatch } from "../../store/hooks";
 
 
 // const interstitial = InterstitialAd.createForAdRequest(adUnitId, {
@@ -13,6 +15,7 @@ export default function CoFoundersFindForm({navigation}:any) {
 
   const [dialogVisible, setDialogVisible] = useState(false);
   const [loading, setLoading] = useState(false);
+  const dispatch = useAppDispatch();
   useEffect(() => {
     console.log('LOAD AD?')
 
@@ -40,14 +43,29 @@ export default function CoFoundersFindForm({navigation}:any) {
       text: "España",
     },
   ]);
-  const handleConfirm = () => {
-    setDialogVisible(false);
-    navigation.navigate('FindingPage');
+  const handleConfirm = async () => {
+    setLoading(true);
+    try {
+      const response = await findMatch();
+      console.log('COFOUNDERS FIND RESPONSE',response);
+      
+      // dispatch(sessionAdd(response.user));
+      navigation.navigate('FindingPage');
+      setDialogVisible(false);
+      setLoading(false);
+    } catch (error) {
+      if (error) Alert.alert('Error' +error.toString());
+      setDialogVisible(false);
+      setLoading(false);
+      console.error(error);
+    }
+    
+    
   };
 
   const handleCancel = () => {
     setDialogVisible(false);
-    setLoading(true);
+    
   };
 
   

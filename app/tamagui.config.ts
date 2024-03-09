@@ -9,6 +9,7 @@ import { themes, tokens } from "@tamagui/themes";
 import { createMedia } from '@tamagui/react-native-media-driver'
 import {  createTamagui } from 'tamagui'
 
+
 const animations = createAnimations({
   bouncy: {
     type: "spring",
@@ -29,8 +30,8 @@ const animations = createAnimations({
   }
 });
 
-const headingFont = createInterFont();
-const bodyFont = createInterFont();
+const headingFont = createInterFont()
+const bodyFont = createInterFont()
 
 const config = createTamagui({
   animations,

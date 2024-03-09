@@ -16,6 +16,7 @@ import { useAppDispatch } from "../store/hooks";
 import { loggedIn } from "../store/reducer";
 import { sessionAdd } from "../store/sessionReducer";
 import {Text,Button, XGroup } from 'tamagui'
+import { login } from "../utils/apis";
 
 
 export default function SignIn({ navigation }: any) {
@@ -33,24 +34,27 @@ export default function SignIn({ navigation }: any) {
   async function signInWithEmail() {
     console.log("signin");
     setLoading(true);
-    const {
-      data: { session },
-      error,
-    } = await supabase.auth.signInWithPassword({
-      email: textEmail,
-      password: textPassword,
-    });
+    // const {
+    //   data: { session },
+    //   error,
+    // } = await supabase.auth.signInWithPassword({
+    //   email: textEmail,
+    //   password: textPassword,
+    // });
 
-    if (error) {
-      Alert.alert(error.message);
-    }
-    console.log("pase IF", error, session);
-    if (error == null) {
+    try {
+      const response = await login(textEmail, textPassword);
+      console.log(response);
+      
       dispatch(loggedIn());
-      dispatch(sessionAdd(session));
+      dispatch(sessionAdd(response.user));
       navigation.navigate("HomeTabs");
+      setLoading(false);
+    } catch (error) {
+      if (error) Alert.alert('Error' +error.toString());
+      console.error(error);
     }
-    setLoading(false);
+
   }
   const handleRegisterPress = () => {
     console.log("Navigate to Register screen");
