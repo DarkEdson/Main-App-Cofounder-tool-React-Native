@@ -1,15 +1,20 @@
 import React , { useState, useEffect }from "react";
 import { View, Text, Image, TouchableOpacity, StyleSheet, GestureResponderEvent } from "react-native";
-import { supabase } from '../lib/supabase'
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { loggedOut } from "../store/reducer";
 
 
 export default function Welcome({navigation} : any) {
-  const sessionSave = useAppSelector((state) => state.sessions.value);
+  const sessionSave:any = useAppSelector((state) => state.sessions.value);
 
 
   const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    return () => {
+      
+    };
+  }, [])
 
   const handleconsole = () => {
     getProfile();
@@ -17,22 +22,8 @@ export default function Welcome({navigation} : any) {
 
   async function getProfile() {
     try {
-      if (!sessionSave?.user) throw new Error('No user on the session!')
-      const { data, error, status } = await supabase
-        .from('profiles')
-        .select(`username, website, avatar_url`)
-        .eq('id', sessionSave?.user.id)
-        .single()
-      if (error && status !== 406) {
-        throw error
-      }
-
-      if (data) {
-        console.log('DATA', data)
-        // setUsername(data.username)
-        // setWebsite(data.website)
-        // setAvatarUrl(data.avatar_url)
-      }
+      if (!sessionSave) throw new Error('No user on the session!')
+      console.log('DATA', sessionSave)
     } catch (error) {
       if (error instanceof Error) {
         console.log(error.message)
@@ -52,7 +43,7 @@ export default function Welcome({navigation} : any) {
       <View style={styles.headerContainer}>
         <View style={styles.headerContainer2}>
           <View style={{ marginHorizontal: 30 }}>
-            <Text style={styles.headerText}>hello Mr. Founder!.</Text>
+            <Text style={styles.headerText}>hello Mr. {sessionSave?.name}!.</Text>
             <Text style={styles.footerText}>Good Evening</Text>
           </View>
           <TouchableOpacity

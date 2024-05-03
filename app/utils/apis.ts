@@ -65,7 +65,7 @@ export const updateUser = async (data: Partial<UserData>): Promise<UserData> => 
 };
 
 export const findMatch = async (): Promise<any> => {
-  const response: AxiosResponse<any> = await api.get('/api/find-match');
+  const response: AxiosResponse<any> = await api.post('/api/find-matches');
   console.log('RESPONSE FIND MATCH' ,response.data)
   return response.data;
 };

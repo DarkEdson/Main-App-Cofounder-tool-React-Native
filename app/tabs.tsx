@@ -91,6 +91,16 @@ export default function tabs() {
             component={Resource}
             options={{ headerShown: false }}
           />
+          <Stack.Screen
+            name="Edit Profile"
+            component={Resource}
+            options={{ title: 'Profile' }}
+          />
+          <Stack.Screen
+            name="Profile"
+            component={Resource}
+            options={{ title: 'Edit Profile' }}
+          />
         </Stack.Group>
       ) : (
         <Stack.Group>
